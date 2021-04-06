@@ -3,6 +3,9 @@
     const addTask = document.getElementById('addTask');
     const addTaskBtn = document.getElementById('addTaskBtn');
     const todos = [];
+    const allRadioBtn = document.getElementById('allRadioBtn');
+    const workRadioBtn = document.getElementById('workRadioBtn');
+    const checkRadioBtn = document.getElementById('checkRadioBtn');
     const showTodo = () => {
       while (document.querySelector('.todoList')) {
         todoBody.removeChild(document.querySelector('.todoList'));
@@ -14,7 +17,7 @@
         tdId.textContent = `${index}`;
         tr.appendChild(tdId);
         const tdComment = document.createElement('td');
-        tdComment.textContent = `${todo}`;
+        tdComment.textContent = todo.comment;
         tr.appendChild(tdComment);
         const tdWorkBtn = document.createElement('td');
         const workBtn = document.createElement('button');
@@ -41,10 +44,21 @@
       });
     };
     addTaskBtn.addEventListener('click', () => {
-      const todo = addTask.value;
+      const todo = {
+        comment: addTask.value,
+        status: '作業中'
+      }
       addTask.value = '';
       if(todo) {
         todos.push(todo);
         showTodo();
       }
+    });
+    workRadioBtn.addEventListener('click', () => {
+      const workTodo = todos.filter(todo => todo.status === '作業中');
+      showTodo(workTodo);
+    });
+    checkRadioBtn.addEventListener('click', () => {
+      const checkTodo = todos.filter(todo => todo.status === '完了');
+      showTodo(checkTodo);
     });
