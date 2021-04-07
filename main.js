@@ -31,6 +31,23 @@
             workBtn.textContent = '作業中';
           }
         });
+        workRadioBtn.addEventListener('click', () => {
+          if(workBtn.innerHTML !== '作業中') {
+            tr.classList.add('none');
+          } else {
+            tr.classList.remove('none');
+          }
+        });
+        checkRadioBtn.addEventListener('click', () => {
+          if(workBtn.innerHTML !== '完了') {
+            tr.classList.add('none'); 
+          } else {
+            tr.classList.remove('none');
+          }
+        });
+        allRadioBtn.addEventListener('click', () => {
+          tr.classList.remove('none');
+        });
         const tdRemoveBtn = document.createElement('td');
         const removeBtn = document.createElement('button');
         removeBtn.textContent = '削除';
@@ -54,11 +71,4 @@
         showTodo();
       }
     });
-    workRadioBtn.addEventListener('click', () => {
-      const workTodo = todos.filter(todo => todo.status === '作業中');
-      showTodo(workTodo);
-    });
-    checkRadioBtn.addEventListener('click', () => {
-      const checkTodo = todos.filter(todo => todo.status === '完了');
-      showTodo(checkTodo);
-    });
+   
